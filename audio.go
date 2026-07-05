@@ -3,7 +3,6 @@ package main
 import (
 	"embed"
 	"path"
-	"runtime"
 	"strconv"
 
 	"github.com/Zyko0/go-sdl3/mixer"
@@ -37,12 +36,6 @@ func NewAudio() *Audio {
 		sounds:           make(map[string]*mixer.Audio),
 		music:            make(map[string]*mixer.Track),
 		currentEngineIdx: -1,
-	}
-
-	// SDL3_mixer has no js/wasm bindings yet: in the browser, skip audio init
-	// entirely and run silently (every play method no-ops on a nil mixer).
-	if runtime.GOOS == "js" {
-		return a
 	}
 
 	if err := mixer.Init(); err != nil {
