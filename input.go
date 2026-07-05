@@ -36,7 +36,9 @@ func (c Controls) getX() float64 {
 func (c Controls) buttonDown(button int) bool {
 	switch button {
 	case 0:
-		return keyDown(sdl.SCANCODE_LCTRL) || keyDown(sdl.SCANCODE_Z) || padButton0()
+		return keyDown(sdl.SCANCODE_LCTRL) || keyDown(sdl.SCANCODE_Z) ||
+			keyDown(sdl.SCANCODE_SPACE) || keyDown(sdl.SCANCODE_RETURN) || keyDown(sdl.SCANCODE_KP_ENTER) ||
+			padButton0()
 	case 1:
 		return keyDown(sdl.SCANCODE_LSHIFT) || keyDown(sdl.SCANCODE_X) || padButton1()
 	}
@@ -47,7 +49,9 @@ func (c Controls) buttonDown(button int) bool {
 func (c Controls) buttonPressed(button int) bool {
 	switch button {
 	case 0:
-		return keyJustPressed(sdl.SCANCODE_LCTRL) || keyJustPressed(sdl.SCANCODE_Z) || padButton0Pressed()
+		return keyJustPressed(sdl.SCANCODE_LCTRL) || keyJustPressed(sdl.SCANCODE_Z) ||
+			keyJustPressed(sdl.SCANCODE_SPACE) || keyJustPressed(sdl.SCANCODE_RETURN) || keyJustPressed(sdl.SCANCODE_KP_ENTER) ||
+			padButton0Pressed()
 	case 1:
 		return keyJustPressed(sdl.SCANCODE_LSHIFT) || keyJustPressed(sdl.SCANCODE_X) || padButton1Pressed()
 	}
