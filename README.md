@@ -11,6 +11,17 @@ All images, sounds and music are embedded, so `go build` produces a single
 self-contained binary that needs no asset files at run time. Keyboard and gamepad
 are both supported.
 
+## Download
+
+Prebuilt, self-contained binaries — no install, no dependencies, assets embedded.
+Grab the latest for your platform:
+
+- **Linux** (amd64) — [leadingedge-linux-amd64.tar.gz](https://github.com/chrplr/leadingedge-go/releases/latest/download/leadingedge-linux-amd64.tar.gz)
+- **macOS** (Apple Silicon) — [leadingedge-macos-arm64.tar.gz](https://github.com/chrplr/leadingedge-go/releases/latest/download/leadingedge-macos-arm64.tar.gz)
+- **Windows** (amd64) — [leadingedge-windows-amd64.zip](https://github.com/chrplr/leadingedge-go/releases/latest/download/leadingedge-windows-amd64.zip)
+
+All versions are on the [releases page](https://github.com/chrplr/leadingedge-go/releases).
+
 ## Run
 
 ```sh
