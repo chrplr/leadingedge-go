@@ -1,5 +1,7 @@
 # Leading Edge — Go port
 
+[![Latest release](https://img.shields.io/github/v/release/chrplr/leadingedge-go)](https://github.com/chrplr/leadingedge-go/releases/latest)
+
 **▶ Play it in your browser: <https://chrplr.github.io/leadingedge-go/>**
 
 A Go re-implementation of the Pygame Zero game **Leading Edge** from *Code the Classics
