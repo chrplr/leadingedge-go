@@ -145,14 +145,14 @@ in one `package main`, so the port is split by concern:
 
 ---
 
-## 4. Framework: Pygame Zero → go‑sdl3
+## 4. Framework: Pygame Zero → pgzgo (on go-sdl3)
 
-| Concern | Python (Pygame Zero / Pygame) | Go (go‑sdl3) |
+| Concern | Python (Pygame Zero / Pygame) | Go (via pgzgo) |
 |---|---|---|
-| Window / loop | `pgzrun.go()` calls `update`/`draw` | explicit `sdl.RunLoop` with manual clear/present |
-| Filled polygons | `pygame.draw.polygon(surface, col, points)` | `renderer.RenderGeometry` with a triangle fan |
+| Window / loop | `pgzrun.go()` calls `update`/`draw` | `app.Loop(update, draw)` — pgzgo's fixed-step loop |
+| Filled polygons | `pygame.draw.polygon(surface, col, points)` | `Screen.FillPolygon` (pgzgo triangulates) |
 | Sprite scaling | `pygame.transform.scale(img, (w,h))` then `blit` | `renderer.RenderTexture(tex, nil, dstRect)` (dst W/H scales) |
-| Images | `images.foo` attribute access, auto‑loaded | lazy `Assets.Texture(name)` cache of `*sdl.Texture` |
+| Images | `images.foo` attribute access, auto-loaded | `Screen.Texture` — pgzgo's lazily-cached texture |
 | Text | sprite‑font blitting via `getattr(images, ...)` | same technique, names built with `strconv.Itoa` |
 | Alpha overlay | `Surface.set_alpha` + `blit` | `SetDrawBlendMode(BLEND)` + `RenderFillRect` |
 | Sound effects | `sounds.foo.play()` | preloaded `map[string]*mixer.Audio` + `PlayAudio` |
@@ -411,17 +411,16 @@ and the steering axis behave identically.
 ## 10. Game loop and timing
 
 Both use the same fixed‑timestep accumulator. Pygame Zero hands `update` a
-`delta_time`; the Go loop computes it from `sdl.Ticks()`:
+`delta_time`; pgzgo's `app.Loop` hands it the real frame delta as `app.Dt`, which
+`update` accumulates into fixed steps:
 
 ```go
-now := sdl.Ticks()
-dt := float64(now-lastTicks) / 1000.0
-lastTicks = now
-if dt > 0.1 { dt = 0.1 }        // clamp to avoid a huge catch-up burst
-...
-for accumulatedTime >= FixedTimestep {
-    accumulatedTime -= FixedTimestep
-    game.Update(FixedTimestep)
+func update(dt float64) {          // dt == app.Dt from the harness
+    accumulatedTime += dt
+    for accumulatedTime >= FixedTimestep {
+        accumulatedTime -= FixedTimestep
+        game.Update(FixedTimestep)
+    }
 }
 ```
 
