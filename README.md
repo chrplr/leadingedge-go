@@ -30,6 +30,14 @@ Gamepad support is native-only; the in-browser build is keyboard-only.
 
 ![Keyboard controls for Leading Edge](keyboard.svg)
 
+## How to play
+
+**The goal.** It's an arcade racer. Drive **5 laps** of the circuit as fast as you can while a pack of computer-controlled cars gets in your way. When you cross the line on the final lap the race ends and your times are shown.
+
+**Driving.** **Steer** left/right, hold **accelerate** to build speed, and tap the **brake** going into the tighter bends so you don't run wide. Drifting off the edge of the track or clipping a rival scrubs your speed, so smooth lines are faster than flat-out.
+
+**Times.** The game clocks every lap and highlights your **fastest lap** — beating your own best is the real challenge. Press **Esc** to end the race early.
+
 ## Download
 
 Prebuilt, self-contained binaries — no install, no dependencies, assets embedded.
